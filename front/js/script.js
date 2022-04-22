@@ -1,11 +1,4 @@
 const API_PRODUCTS = "http://localhost:3000/api/products";
-const API_PRODUCT = "http://localhost:3000/api/products/:product-id";
-
-const getProduct = async (productId) => {
-  const response = await fetch(API_PRODUCT + productId);
-  const product = await response.json();
-  console.log(product);
-};
 
 /**
  * Returns the list of products in json format
@@ -14,7 +7,6 @@ const getProduct = async (productId) => {
 const getProductData = async () => {
   const response = await fetch(API_PRODUCTS);
   const products = await response.json();
-  console.log(products);
   return products;
 };
 
@@ -24,7 +16,7 @@ const getProductData = async () => {
  * @returns
  */
 const productItemElement = (product) => `
-    <a href="./product.html?id=42">
+    <a href="./product.html?id=${product._id}">
         <article>
             <img src="${product.imageUrl}" alt="${product.altTxt}">
             <h3 class="productName">${product.name}</h3>
