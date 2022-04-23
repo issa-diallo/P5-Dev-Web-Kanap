@@ -2,7 +2,8 @@ const API_PRODUCTS = "http://localhost:3000/api/products";
 
 /**
  * Returns the list of products in json format
- * @returns
+ * @param  {} =>{constresponse=awaitfetch(API_PRODUCTS
+ * @param  {} constproducts=awaitresponse.json(
  */
 const getProductData = async () => {
   const response = await fetch(API_PRODUCTS);
@@ -11,9 +12,7 @@ const getProductData = async () => {
 };
 
 /**
- * Displays a product element with its content
- * @param {*} product
- * @returns
+ * @param  {} product
  */
 const productItemElement = (product) => `
     <a href="./product.html?id=${product._id}">
@@ -29,12 +28,12 @@ const productItemElement = (product) => `
  * Injects data in items
  */
 const useData = async () => {
-    const data = await getProductData();
-    const items = document.querySelector("#items");
+  const data = await getProductData();
+  const items = document.querySelector("#items");
 
-    items.innerHTML += data
-        .map((product) => productItemElement(product))
-        .join("");
+  items.innerHTML += data
+    .map((product) => productItemElement(product))
+    .join("");
 };
 
 useData();

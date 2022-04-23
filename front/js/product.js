@@ -12,7 +12,8 @@ const API_PRODUCT = `http://localhost:3000/api/products/${productId}`;
 
 /**
  * Returns a product in json format
- * @returns
+ * @param  {} =>{constresponse=awaitfetch(API_PRODUCT
+ * @param  {} constproduct=awaitresponse.json(
  */
 const getProductData = async () => {
   const response = await fetch(API_PRODUCT);
@@ -26,28 +27,80 @@ const getProductData = async () => {
 const makeProduct = async () => {
   const data = await getProductData();
 
+  // Create a Image
   const img = document.querySelector(".item__img");
-
   const image = document.createElement("img");
   image.src = data.imageUrl;
   image.alt = data.altTxt;
+  img.appendChild(image);
 
+  // Add textContent in elements
   const h1 = document.querySelector("#title");
+  h1.textContent += data.name;
+
   const price = document.querySelector("#price");
+  price.textContent += data.price;
+
   const description = document.querySelector("#description");
+  description.textContent += data.description;
+
   const select = document.querySelector("#colors");
   const colors = data.colors;
 
-  img.appendChild(image);
-  h1.textContent += data.name;
-  price.textContent += data.price;
-  description.textContent += data.description;
-
+  /**
+   * @param  {} (color
+   * @param  {} =>{constoption=document.createElement("option"
+   * @param  {} option.value=coloroption.textContent=colorselect.appendChild(option
+   * @param  {} }
+   */
   colors.map((color) => {
     const option = document.createElement("option");
     option.value = color;
     option.textContent = color;
     select.appendChild(option);
   });
+
+  const button = document.querySelector("#addToCart");
+
+  button.addEventListener("click", () => {
+    const colorValue = document.querySelector("#colors").value;
+    const quantityValue = document.querySelector("#quantity").value;
+
+    /**
+     * if the user does not enter a colour and a quantity send an alert
+     */
+    if (
+      colorValue == null ||
+      colorValue == "" ||
+      quantity == null ||
+      quantity == 0
+    ) {
+      alert("<p>Please select a color and quantity</p>");
+    }
+
+    /**
+     * data recording
+     * @param  {} quantityValue
+     */
+    const getData = {
+      price: data.price,
+      srcImage: data.imageUrl,
+      altImage: data.altTxt,
+      title: data.name,
+      id: productId,
+      color: colorValue,
+      quantity: Number(quantityValue)
+    };
+
+    /**
+     * @param  {} "valueData"
+     * @param  {} JSON.stringify(getData
+     */
+    localStorage.setItem(JSON.stringify(productId), JSON.stringify(getData));
+
+    // redirection to the shopping cart page
+    window.location.href = "cart.html";
+  });
 };
+
 makeProduct();
