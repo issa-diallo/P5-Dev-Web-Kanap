@@ -83,20 +83,17 @@ const makeProduct = async () => {
      * @param  {} quantityValue
      */
     const getData = {
-      price: data.price,
-      srcImage: data.imageUrl,
-      altImage: data.altTxt,
-      title: data.name,
       id: productId,
       color: colorValue,
       quantity: Number(quantityValue)
     };
+    keyId = getData.color + productId
 
     /**
      * @param  {} "valueData"
      * @param  {} JSON.stringify(getData
      */
-    localStorage.setItem(JSON.stringify(productId), JSON.stringify(getData));
+    localStorage.setItem(JSON.stringify(keyId), JSON.stringify(getData));
 
     // redirection to the shopping cart page
     window.location.href = "cart.html";
