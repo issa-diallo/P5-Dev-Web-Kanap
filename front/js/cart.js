@@ -6,12 +6,15 @@ const recoversEachOrderOfCache = () => {
     for (let i = 0; i < storageLength; i++) {
         const item = localStorage.getItem(localStorage.key(i));
         const objItem = JSON.parse(item)
-        console.log(objItem);
+        cart.push(objItem)
     }
 }
 
 
-
+/**
+ * Create for each product the code html and Event
+ * @param {*} item
+ */
 const displayItem = async (item) => {
     // Get of the id in localStorage
     const productId = item.id
@@ -40,29 +43,14 @@ const displayItem = async (item) => {
 }
 
 const displayTotalQuantity = () => {
-    // let total = 0
     const totalQuatity = document.querySelector('#totalQuantity')
     let total = cart.reduce((total,element) => total + element.quantity,0);
-    
-    //  cart.forEach((element)=>{
-    //     // const totalElementQuantity = element.quantity;
-    //     console.log(element.quantity);
-    //     // total += totalElementQuantity
-    // })
-
     totalQuatity.textContent = total
 }
 
 const displayTotalPrice = (product) => {
     const totalPrice = document.querySelector('#totalPrice')
     let total = cart.reduce((total,element) => total + (element.quantity * product.price),0);
-    
-    // cart.forEach((element)=>{
-    //     const totalElementPrice = element.quantity * product.price;
-    //     total += totalElementPrice
-    // })
-
-    // console.log(total);
     totalPrice.textContent = total
 }
 
@@ -94,6 +82,7 @@ const makeCartItemsettings = (item,product) => {
     const p = document.createElement('p')
     p.classList.add("deleteItem")
     p.textContent = "Supprimer"
+    p.addEventListener("click", () => deleteItem(item, item.color,product))
     
     div.appendChild(divSettingsQuantity)
     divSettingsQuantity.appendChild(quantity)
@@ -103,6 +92,47 @@ const makeCartItemsettings = (item,product) => {
     deleteDiv.appendChild(p)
 
     return div
+}
+
+/**
+ * Delete a product of cart and localStorage
+ * @param {*} item
+ * @param {*} color
+ */
+const deleteItem = (item, color,product) => {
+    // Delete data of cart
+    const deleteProduct = cart.findIndex((product) => (product.id === item.id) && (product.color === color))
+    cart.splice(deleteProduct,1)
+    //Delete data of localStorage
+    deleteData(item,color)
+    // Delete data display article
+    deleteDataPage(item)
+    // update total price and quantity
+    displayTotalQuantity()
+    displayTotalPrice(product)
+
+}
+
+/**
+ * Delete product of page
+ * @param {*} item
+ */
+const deleteDataPage = (item) => {
+    const article = document.querySelector('Article')
+    if (article.dataset.id == item.id && article.dataset.color == item.color) {
+        article.remove()
+    }
+}
+
+/**
+ * Delete data local storage
+ * @param {*} item
+ * @param {*} color
+ */
+const deleteData = (item,color) => {
+    const keyId = color + item.id
+    var KeyName = window.localStorage.key(keyId);
+    localStorage.removeItem(KeyName);
 }
 
 const getCartItem = (id,color) => cart.find((item) => (item.id === id) && (item.color === color) )
@@ -117,7 +147,6 @@ const updateTotalQuantityPrice = (item, color, inputNewValue, product) => {
     displayTotalPrice(product)
     //Save new data
     saveNewData(cartItem)
-
 }
 
 const saveNewData = (item) => {
@@ -125,7 +154,6 @@ const saveNewData = (item) => {
     const dataToSaveQuantity = item
     // Create keyId
     const keyId = item.color + item.id
-    console.log(keyId);
     // Save in localStorage
     localStorage.setItem(JSON.stringify(keyId), JSON.stringify(dataToSaveQuantity) )
 }
@@ -183,8 +211,5 @@ const cart = []
 recoversEachOrderOfCache()
 
 cart.forEach(item=>displayItem(item))
-
-// console.log(localStorage.getItem("orderId"))
-//     localStorage.clear();
 
 // module.exports = {getCartItem}

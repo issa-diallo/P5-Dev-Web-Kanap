@@ -8,7 +8,6 @@ const API_PRODUCTS = "http://localhost:3000/api/products";
 const getProductData = async () => {
   const response = await fetch(API_PRODUCTS);
   const products = await response.json();
-  console.log(products);
   return products;
 };
 
