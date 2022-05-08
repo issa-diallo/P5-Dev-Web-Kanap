@@ -28,7 +28,7 @@ const productItemElement = (product) => `
 /**
  * Injects data in items
  */
-const useData = async () => {
+const fetchData = async () => {
   const data = await getProductData();
   const items = document.querySelector("#items");
 
@@ -37,6 +37,10 @@ const useData = async () => {
   .join("");
 };
 
-useData();
+// useData();
+window.onload = () => {
+  fetchData()
+}
 
-module.exports = getProductData;
+
+module.exports = {fetchData,getProductData,productItemElement};

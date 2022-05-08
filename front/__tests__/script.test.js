@@ -1,7 +1,15 @@
-const getProductData = require('../js/script')
+/**
+ * @jest-environment jsdom
+ */
 
-describe('Product',()=>{
-    it('should get data', async () => {
-        
-    })
-})
+const {productItemElement} = require("../js/script");
+
+describe("Product", () => {
+  it("should show element", () => {
+      const product = {
+          _id:1
+      }
+    expect(productItemElement(product)).toContain(
+      '<a href="./product.html?id=1">');
+  });
+});

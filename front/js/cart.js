@@ -6,7 +6,7 @@ const recoversEachOrderOfCache = () => {
     for (let i = 0; i < storageLength; i++) {
         const item = localStorage.getItem(localStorage.key(i));
         const objItem = JSON.parse(item)
-        cart.push(objItem)
+        console.log(objItem);
     }
 }
 
@@ -40,15 +40,22 @@ const displayItem = async (item) => {
 }
 
 const displayTotalQuantity = () => {
+    // let total = 0
     const totalQuatity = document.querySelector('#totalQuantity')
     let total = cart.reduce((total,element) => total + element.quantity,0);
     
+    //  cart.forEach((element)=>{
+    //     // const totalElementQuantity = element.quantity;
+    //     console.log(element.quantity);
+    //     // total += totalElementQuantity
+    // })
+
     totalQuatity.textContent = total
 }
 
 const displayTotalPrice = (product) => {
     const totalPrice = document.querySelector('#totalPrice')
-    let total = cart.reduce((total,element) => total + element.quantity * product.price,0);
+    let total = cart.reduce((total,element) => total + (element.quantity * product.price),0);
     
     // cart.forEach((element)=>{
     //     const totalElementPrice = element.quantity * product.price;
@@ -79,8 +86,7 @@ const makeCartItemsettings = (item,product) => {
     /**
      * Create a Event then a pass id for get the value in cart
      */
-    input.addEventListener('input',() => updateTotalQuantityPrice(item.id, input.value,product))
-
+    input.addEventListener('input',() => updateTotalQuantityPrice(item, item.color, input.value,product))
 
     const deleteDiv = document.createElement('div')
     deleteDiv.classList.add("cart__item__content__settings__delete")
@@ -99,15 +105,29 @@ const makeCartItemsettings = (item,product) => {
     return div
 }
 
-const updateTotalQuantityPrice = (id, inputNewValue, product) => {
-    // Get the current element
-    const getItem = cart.find((element) => element.id === id )
+const getCartItem = (id,color) => cart.find((item) => (item.id === id) && (item.color === color) )
+
+const updateTotalQuantityPrice = (item, color, inputNewValue, product) => {
+    const cartItem = getCartItem(item.id, color)
     // get new value quantity
-    getItem.quantity = Number(inputNewValue)
+    cartItem.quantity = Number(inputNewValue)
+    item.quantity = cartItem.quantity
     // update total price and quantity
     displayTotalQuantity()
     displayTotalPrice(product)
+    //Save new data
+    saveNewData(cartItem)
 
+}
+
+const saveNewData = (item) => {
+    // Converti in JSON
+    const dataToSaveQuantity = item
+    // Create keyId
+    const keyId = item.color + item.id
+    console.log(keyId);
+    // Save in localStorage
+    localStorage.setItem(JSON.stringify(keyId), JSON.stringify(dataToSaveQuantity) )
 }
 
 const makeCartItemContent = (item,product) => {
@@ -166,3 +186,5 @@ cart.forEach(item=>displayItem(item))
 
 // console.log(localStorage.getItem("orderId"))
 //     localStorage.clear();
+
+// module.exports = {getCartItem}

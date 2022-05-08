@@ -87,7 +87,7 @@ const makeProduct = async () => {
       color: colorValue,
       quantity: Number(quantityValue)
     };
-    keyId = getData.color + productId
+    const keyId = getData.color + productId
 
     /**
      * @param  {} "valueData"
@@ -100,4 +100,6 @@ const makeProduct = async () => {
   });
 };
 
-makeProduct();
+window.onload = () => {
+  makeProduct()
+}
