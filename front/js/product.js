@@ -1,3 +1,6 @@
+window.onload = () => {
+  makeProduct()
+}
 /**
  * Get of the id in the url
  */
@@ -72,10 +75,10 @@ const makeProduct = async () => {
     if (
       colorValue == null ||
       colorValue == "" ||
-      quantity == null ||
-      quantity == 0
+      quantityValue == null ||
+      quantityValue == 0
     ) {
-      alert("<p>Please select a color and quantity</p>");
+      return alert("<p>Please select a color and quantity</p>");
     }
 
     /**
@@ -87,7 +90,7 @@ const makeProduct = async () => {
       color: colorValue,
       quantity: Number(quantityValue)
     };
-    const keyId = getData.color + productId
+    const keyId = getData.color + "_" + productId
 
     /**
      * @param  {} "valueData"
@@ -99,7 +102,3 @@ const makeProduct = async () => {
     window.location.href = "cart.html";
   });
 };
-
-window.onload = () => {
-  makeProduct()
-}
