@@ -13,5 +13,4 @@ const getRemoveProduct = (e) => {
     window.location.reload(true);
   }, 100);
 };
-
 export { getRemoveProduct };

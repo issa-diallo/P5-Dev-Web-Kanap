@@ -21,5 +21,4 @@ const quantityChanged = async (e) => {
     }
   });
 };
-
 export { quantityChanged };

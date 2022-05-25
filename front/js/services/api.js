@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = "http://localhost:3000";
 /**
  * Returns the list of products in json format
  */
@@ -8,7 +8,6 @@ const getProducts = async () => {
   const products = await response.json();
   return products;
 };
-
 /**
  * Returns a product in json format
  */
@@ -18,5 +17,20 @@ const getProduct = async (id) => {
   const product = await response.json();
   return product;
 };
-
-export { getProducts, getProduct };
+/**
+ *  Returns the table of products and orderId (string)
+ */
+const postOrder = async (orderData) => {
+  const API_ORDER = `${BASE_URL}/api/products/order`;
+  const response = await fetch(API_ORDER, {
+    method: "POST",
+    body: JSON.stringify(orderData),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+};
+export { getProducts, getProduct, postOrder };

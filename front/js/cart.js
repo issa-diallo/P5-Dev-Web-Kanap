@@ -5,6 +5,8 @@ import { getRemoveProduct } from "./utils/cart/removeProduct.js";
 import { cartTotalQuantity } from "./utils/cart/cartTotalQuantity.js";
 import { cartTotalPrice } from "./utils/cart/cartTotalPrice.js";
 import { quantityChanged } from "./utils/cart/quantityChanged.js";
+import { setupForms } from "./form/checkIsFormValid.js";
+import { submitForm } from "./form/submitForm.js";
 
 window.onload = () => {
   fetchCart();
@@ -35,5 +37,8 @@ const fetchCart = async () => {
       const element = removeCartItems[i];
       element.addEventListener("click", getRemoveProduct);
     }
+    setupForms()
+    const orderButton = document.querySelector('#order')
+    orderButton.addEventListener('click', submitForm)
   });
 };

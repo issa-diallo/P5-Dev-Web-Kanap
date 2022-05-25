@@ -1,7 +1,7 @@
 /**
  * Retrieve the basket via localStorage and format data JSON to JS then add each product in cart
  */
-export const basketLocalStorage = () => {
+const basketLocalStorage = () => {
   const cart = [];
   const storageLength = localStorage.length;
   for (let i = 0; i < storageLength; i++) {
@@ -9,5 +9,6 @@ export const basketLocalStorage = () => {
     const productToJs = JSON.parse(product);
     cart.push(productToJs);
   }
-  return cart
+  return cart;
 };
+export { basketLocalStorage };

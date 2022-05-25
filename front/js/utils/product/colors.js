@@ -1,7 +1,6 @@
 const getColors = (product) => {
   const select = document.querySelector("#colors");
   const colors = product.colors;
-
   colors.map((color) => {
     const option = document.createElement("option");
     option.value = color;
@@ -10,5 +9,4 @@ const getColors = (product) => {
   });
   return select;
 };
-
 export { getColors };

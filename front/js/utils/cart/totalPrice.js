@@ -7,5 +7,4 @@ const displayTotalPrice = (productData, cart) => {
   );
   return (totalPrice.textContent = total);
 };
-
 export { displayTotalPrice };

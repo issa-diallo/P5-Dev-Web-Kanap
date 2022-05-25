@@ -1,4 +1,4 @@
-const cartItemElement = (productData,productLocalStorage,id) => `
+const cartItemElement = (productData, productLocalStorage, id) => `
   <article class="cart__item" data-id="${id}" data-color="${productLocalStorage.color}">
   <div class="cart__item__img">
     <img src="${productData.imageUrl}" alt="${productData.altTxt}">
@@ -21,5 +21,4 @@ const cartItemElement = (productData,productLocalStorage,id) => `
   </div>
 </article>
 `;
-
-export {cartItemElement}
+export { cartItemElement };

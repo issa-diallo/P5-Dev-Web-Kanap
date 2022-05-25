@@ -134,7 +134,18 @@ h2 {
 	box-shadow: rgb(42 18 206 / 90%) 0 0 22px 6px;
 }
 
+/***************/
+/*Form Cart*/
+/***************/
+input:disabled {
+	cursor: not-allowed;
+	opacity: .6;
+}
 
+P.error {
+	color: rgb(242, 2, 2);
+	font-size: large;
+}
 
 /***************/
 /*Media queries*/
