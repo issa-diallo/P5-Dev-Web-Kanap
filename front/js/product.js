@@ -1,15 +1,15 @@
 import { getProduct } from "./services/api.js";
-import { getProductId } from "./utils/product/urlProductId.js";
 import { productElement } from "./components/product.js";
 import { getColors } from "./utils/product/colors.js";
 import { handleClick } from "./utils/product/handleClick.js";
+import { getUrlId } from "./utils/helpers/getUrlId.js";
 
 window.onload = () => {
   fetchProduct();
 };
 
 const fetchProduct = async () => {
-  const productId = getProductId();
+  const productId = getUrlId("id");
   const product = await getProduct(productId);
 
   const section = document.querySelector(".item");

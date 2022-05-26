@@ -1,3 +1,4 @@
+import { reloadPage } from "../helpers/reloadPage.js";
 import { cartTotalPrice } from "./cartTotalPrice.js";
 
 const getRemoveProduct = (e) => {
@@ -9,8 +10,6 @@ const getRemoveProduct = (e) => {
   localStorage.removeItem(keyNameStorage);
   article.remove();
   cartTotalPrice();
-  window.setTimeout(() => {
-    window.location.reload(true);
-  }, 100);
+  reloadPage()
 };
 export { getRemoveProduct };

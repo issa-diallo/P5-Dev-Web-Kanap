@@ -10,11 +10,10 @@ const quantityChanged = async (e) => {
   const id = keyNameStorage.split("_")[1];
   const cart = basketLocalStorage();
   cart.map((item) => {
-    if (item.id == id) {
+    if (item.color+"_"+item.id == keyNameStorage) {
       let product = item;
       let input = e.target;
       product.quantity = Number(input.value);
-      console.log({ cart });
       localStorage.setItem(keyNameStorage, JSON.stringify(product));
       cartTotalQuantity(cart);
       cartTotalPrice();

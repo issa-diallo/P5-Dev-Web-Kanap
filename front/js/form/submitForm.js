@@ -1,7 +1,7 @@
 import { postOrder } from "../services/api.js";
 import { basketLocalStorage } from "../utils/cart/basketLocalStorage.js";
 
-const submitForm = (e) => {
+const submitForm = async (e) => {
   e.preventDefault();
   const cart = basketLocalStorage();
   if (cart.length === 0) {
@@ -27,10 +27,10 @@ const submitForm = (e) => {
     products: ids,
   };
   // Requete vers le serveur
-  postOrder(body);
-
+  const dataOrder = await postOrder(body);
   // redirection to the shopping cart page
-  window.location.href = "confirmation.html";
+  window.location.href = "confirmation.html" + `?order=${dataOrder.orderId}`;
 };
 
 export { submitForm };
+
