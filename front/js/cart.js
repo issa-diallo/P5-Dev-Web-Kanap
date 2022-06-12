@@ -12,32 +12,44 @@ window.onload = () => {
   fetchCart();
 };
 
+/**
+ * Manage cart
+ */
 const fetchCart = async () => {
+  //Get products in cart
   const cart = basketLocalStorage();
+  // Display products
   cart.map(async (product) => {
     const productId = product.color + "_" + product.id;
     const id = productId.split("_");
+    // Call Api
     const productData = await getProduct(id[1]);
 
+    // Injects data in component
     const section = document.querySelector("#cart__items");
     const article = cartItemElement(productData, product, productId);
     section.innerHTML += article;
 
+    // Display Total
     cartTotalQuantity(cart);
     cartTotalPrice();
 
+    // Change quantity and update price
     const quantityInputs = document.querySelectorAll(".itemQuantity");
     for (let i = 0; i < quantityInputs.length; i++) {
       const element = quantityInputs[i];
       element.addEventListener("change", quantityChanged);
     }
 
+    // Remove product some cart
     const removeCartItems = document.querySelectorAll(".deleteItem");
     for (let i = 0; i < removeCartItems.length; i++) {
       const element = removeCartItems[i];
       element.addEventListener("click", getRemoveProduct);
     }
+    // Check is form valid
     setupForms()
+
     const orderButton = document.querySelector('#order')
     orderButton.addEventListener('click', submitForm)
   });

@@ -4,6 +4,9 @@ window.onload = () => {
   fetchOrder();
 };
 
+/**
+ * Display order
+ */
 const fetchOrder = () => {
   const orderId = getUrlId("order");
   const displayOrderId = document.querySelector("#orderId");

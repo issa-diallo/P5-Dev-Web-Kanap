@@ -3,7 +3,6 @@ import { cartTotalPrice } from "./cartTotalPrice.js";
 import { cartTotalQuantity } from "./cartTotalQuantity.js";
 
 const quantityChanged = async (e) => {
-  // TO DO change method for get key id
   let article =
     e.target.parentElement.parentElement.parentElement.parentElement;
   const keyNameStorage = article.getAttribute("data-id");

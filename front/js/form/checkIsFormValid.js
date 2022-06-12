@@ -1,5 +1,8 @@
 let check = {};
 
+/**
+ * Listener function definitions
+ */
 let listenerFunction = {
   checkFirsName: (e) => {
     const input = e.target;
@@ -98,6 +101,10 @@ let listenerFunction = {
   },
 };
 
+/**
+ * Validation Form 
+ * @Return Boolean
+ */
 const checkFormValidity = () => {
   let result = true;
   const form = document.forms[0];
@@ -114,6 +121,9 @@ const checkFormValidity = () => {
   return false;
 };
 
+/**
+ * Validation of the state of the form to activate the submit button
+ */
 const setSubmitButton = () => {
   const form = document.forms[0];
   if (form) {
@@ -127,6 +137,9 @@ const setSubmitButton = () => {
   }
 };
 
+/**
+ * In charge of setting up subscriptions
+ */
 const setupForms = () => {
   const firstname = document.forms[0]["firstName"];
   firstname

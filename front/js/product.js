@@ -8,6 +8,9 @@ window.onload = () => {
   fetchProduct();
 };
 
+/**
+ * Injects data in only item
+ */
 const fetchProduct = async () => {
   const productId = getUrlId("id");
   const product = await getProduct(productId);

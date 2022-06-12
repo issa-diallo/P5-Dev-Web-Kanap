@@ -1,5 +1,4 @@
 const cartTotalPrice = () => {
-  const cartItemArticle = document.getElementsByClassName("cart__item")[0];
   const cartRows = document.getElementsByClassName("cart__item__content");
   let total = 0;
   for (let i = 0; i < cartRows.length; i++) {

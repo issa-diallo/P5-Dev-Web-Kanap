@@ -10,7 +10,7 @@ const handleClick = () => {
   if (colorValue == null || colorValue == "") {
     return alert("<p>Please select a color !</p>");
   }
-  if (quantityValue == null || quantityValue == 0) {
+  if (quantityValue == null || quantityValue == 0 || quantityValue > 100) {
     return alert("<p>Please select a quantity !</p>");
   }
   const getData = {
@@ -19,7 +19,20 @@ const handleClick = () => {
     quantity: Number(quantityValue),
   };
   const keyId = getData.color + "_" + productId;
-  localStorage.setItem(keyId, JSON.stringify(getData));
+
+  // Get the existing data from localStorage
+  var existing = localStorage.getItem(keyId);
+
+  // If no existing data, use the value by itself
+  // Otherwise, add the new value to it
+ if (existing) {
+    existing = JSON.parse(existing);
+    existing.quantity += getData.quantity;
+    localStorage.setItem(keyId, JSON.stringify(existing));
+  }else {
+    localStorage.setItem(keyId, JSON.stringify(getData));
+  }
+
   // redirection to the shopping cart page
   window.location.href = "cart.html";
 };
